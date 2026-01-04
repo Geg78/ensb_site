@@ -140,7 +140,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = 'gegoubemapagne@gmail.com'
-# EMAIL_HOST_PASSWORD = 'Informatique@1991'
 EMAIL_HOST_PASSWORD = os.environ.get('Informatique@1991')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
