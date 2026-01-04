@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Recherche{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+
+        <h2 class="text-center mb-4">Recherche scientifique</h2>
+
+        <p class="lead text-center">
+            La recherche constitue un pilier fondamental de l’École Normale Supérieure de Bongor,
+            contribuant à la production et à la diffusion des savoirs.
+        </p>
+
+        <div class="row g-4 mt-5">
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold">Nos axes de recherche</h5>
+                        <p>Thématiques scientifiques majeures développées à l’ENSB.</p>
+                        <a href="{% url 'axes_recherche' %}" class="btn btn-outline-primary">Découvrir</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold">Unités et Laboratoires</h5>
+                        <p>Structures dédiées à la recherche et à l’innovation.</p>
+                        <a href="{% url 'laboratoires_list' %}" class="btn btn-outline-primary">Voir</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold">Publications</h5>
+                        <p>Articles, ouvrages et productions scientifiques.</p>
+                        <a href="{% url 'publications_list' %}" class="btn btn-outline-primary">Consulter</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

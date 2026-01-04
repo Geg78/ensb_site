@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ laboratoire.nom }}{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+
+        <h2 class="mb-4">{{ laboratoire.nom }}</h2>
+
+        <p>{{ laboratoire.description }}</p>
+
+        <hr>
+
+        <h5>Départements concernés</h5>
+        <ul>
+            {% for dept in laboratoire.departements.all %}
+                <li>{{ dept.nom }}</li>
+            {% empty %}
+                <li>Aucun département associé</li>
+            {% endfor %}
+        </ul>
+
+        <h5 class="mt-4">Responsables</h5>
+        <ul>
+            {% for resp in laboratoire.responsables.all %}
+                <li>{{ resp.prenom }} {{ resp.nom }} - {{ resp.grade }}</li>
+            {% empty %}
+                <li>Aucun responsable défini</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</section>
+{% endblock %}

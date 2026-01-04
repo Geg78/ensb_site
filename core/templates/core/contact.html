@@ -1,0 +1,81 @@
+
+{% extends 'core/base.html' %}
+!
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+{% load static %}
+<section class="py-2 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-2">Contactez-nous</h2>
+
+        <div class="row g-4"> 
+
+            <!-- INFOS CONTACT -->
+            <div class="col-md-4">
+                <div class="p-4 bg-white shadow-sm rounded h-50">
+                    <h5 class="text-center">École Normale Supérieure de Bongor</h5>
+                    <p class="mb-1"><strong>Adresse :</strong> Bongor, Tchad</p>
+                    <p class="mb-1"><strong>Téléphone :</strong> +235 66 35 70 70</p>
+                    <p class="mb-1"><strong>Email :</strong> ecolenormsup2010@gmail.com</p>
+                    <p><strong>Horaires :</strong> Lun – Ven : 8h – 16h</p>
+                </div>
+            </div>
+
+            <!-- FORMULAIRE -->
+            <div class="col-md-4">
+                <div class="p-4 bg-white shadow-sm rounded h-100">
+                    <h5 class="mb-3">Nous écrire</h5>
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Nom</label>
+                            <input type="text" name="nom" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Sujet</label>
+                            <input type="text" name="sujet" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Message</label>
+                            <textarea name="message" class="form-control" rows="4" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            Envoyer
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
+            <!-- CARTE -->
+            <div class="col-md-4">
+                <div class="h-100 shadow-sm rounded overflow-hidden">
+                    <iframe
+                        src="https://www.google.com/maps?q=École+Normale+Supérieure+de+Bongor&hl=fr&z=17&output=embed"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

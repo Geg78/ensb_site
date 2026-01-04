@@ -1,0 +1,58 @@
+{% extends 'core/base.html' %}
+{% block title %}Admissions{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Admissions</h2>
+
+        {% for info in informations %}
+        <div class="card mb-4 shadow-sm">
+            {% if info.image %}
+            <img src="{{ info.image.url }}" class="card-img-top" alt="{{ info.titre }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ info.titre }}</h5>
+                <p class="card-text">{{ info.contenu|linebreaks }}</p>
+
+                {% if info.documents.all %}
+                <h6>Documents à télécharger :</h6>
+                <ul>
+                    {% for doc in info.documents.all %}
+                    <li>
+                        <a href="{{ doc.fichier.url }}" target="_blank">{{ doc.nom }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {% if info.etapes.all %}
+                <div class="accordion" id="accordion{{ forloop.counter }}">
+                    {% for etape in info.etapes.all %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading{{ forloop.parentloop.counter }}{{ forloop.counter }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse{{ forloop.parentloop.counter }}{{ forloop.counter }}">
+                                {{ etape.titre }}
+                            </button>
+                        </h2>
+                        <div id="collapse{{ forloop.parentloop.counter }}{{ forloop.counter }}" class="accordion-collapse collapse"
+                             data-bs-parent="#accordion{{ forloop.parentloop.counter }}">
+                            <div class="accordion-body">
+                                {{ etape.description|linebreaks }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">Aucune information d'admission disponible pour le moment.</p>
+        {% endfor %}
+
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ axe.titre }}{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+
+        <h2 class="mb-4">{{ axe.titre }}</h2>
+
+        <p>{{ axe.description }}</p>
+
+        <hr>
+
+        <h5>Départements concernés</h5>
+        <ul>
+            {% for dept in axe.departements.all %}
+                <li>{{ dept.nom }}</li>
+            {% empty %}
+                <li>Aucun département associé</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</section>
+{% endblock %}

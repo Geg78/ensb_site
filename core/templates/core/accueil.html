@@ -1,0 +1,116 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<!-- Hero Carousel -->
+<section class="hero-carousel position-relative">
+
+    <div id="heroCarousel"
+         class="carousel slide carousel-fade"
+         data-bs-ride="carousel">
+
+        <!-- Indicateurs -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'images/h1.png' %}" class="d-block w-100 hero-img">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/h2.png' %}" class="d-block w-100 hero-img">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/h3.png' %}" class="d-block w-100 hero-img">
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="hero-overlay"></div>
+
+    <!-- Contenu -->
+    <div class="hero-content text-white text-center">
+        <div data-aos="fade-up">
+            <h1 class="display-5 fw-bold mb-3">
+                École Normale Supérieure de Bongor
+            </h1>
+            <p class="lead mb-4">
+                Former les enseignants de demain et promouvoir l’excellence académique.
+            </p>
+            <a href="{% url 'fac_dep_form' %}" class="btn btn-primary btn-lg">
+                Découvrir nos formations
+            </a>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- ================= FACULTÉS ================= -->
+<section class="py-5" data-aos="fade-up">
+    <div class="container">
+        <h2 class="text-center mb-4">Nos facultés</h2>
+        <div class="row g-4 justify-content-center">
+            {% for faculte in facultes %}
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm" data-aos-delay="100">
+                    <div class="card-header text-center fw-bold">{{ faculte.nom }}</div>
+                    <div class="card-body">
+                         <!-- <h5 class="card-title text-center">{{ faculte.nom }}</h5> -->
+                        <p class="card-text">{{ faculte.description|truncatewords:20 }}</p>
+                            <a href="{% url 'departements' faculte.id %}" class="btn btn-outline-primary">
+                                Voir les départements
+                            </a>
+                    </div>
+            </div>
+        </div>
+            {% empty %}
+                <p class="text-center">Aucune faculté enregistrée.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ================= ACTUALITÉS ================= -->
+<section class="bg-light py-5" data-aos="fade-up" data-aos-delay="200">
+    <div class="container">
+        <h2 class="text-center mb-5">Actualités</h2>
+
+        <div class="row g-4">
+            {% for act in actualites %}
+            <div class="col-4">
+                <div class="d-flex flex-column flex-md-row shadow-sm rounded overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    
+                    {% if act.image %}
+                        <img src="{{ act.image.url }}" alt="{{ act.titre }}" 
+                             class="img-fluid" style="width:300px; height:200px; object-fit:cover;">
+                    {% endif %}
+                    
+                    <div class="p-3 flex-grow-1 d-flex flex-column justify-content-between">
+                        <div>
+                            <h6 class="fw-bold">{{ act.titre }}</h6>
+                            <p>{{ act.contenu|truncatewords:40 }}</p>
+                        </div>
+                        <a href="{% url 'detail_actualite' act.id %}" class="btn btn-outline-primary btn-sm align-self-start mt-2">
+                            Lire la suite
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            {% empty %}
+                <p class="text-center">Aucune actualité disponible.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

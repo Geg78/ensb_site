@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Axes de recherche{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+
+        <h2 class="text-center mb-4">Axes de recherche</h2>
+
+        <div class="row g-4">
+            {% for axe in axes %}
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ axe.titre }}</h5>
+                        <p class="card-text">
+                            {{ axe.description|truncatewords:20 }}
+                        </p>
+                        <a href="{% url 'axe_recherche_detail' axe.id %}"
+                           class="btn btn-outline-primary">
+                            Lire la suite
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">Aucun axe de recherche disponible.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+{% endblock %}

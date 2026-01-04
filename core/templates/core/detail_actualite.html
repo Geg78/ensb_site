@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ actualite.titre }}{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="card-title mb-3">{{ actualite.titre }}</h1>
+                <small class="text-muted mb-3 d-block">
+                    Publié le {{ actualite.date_publication|date:"d/m/Y" }}
+                </small>
+                <p class="card-text">{{ actualite.contenu }}</p>
+                <a href="{% url 'actualites' %}" class="btn btn-outline-primary mt-3">
+                    ← Retour à toutes les actualités
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

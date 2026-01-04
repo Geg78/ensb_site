@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Laboratoires{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+
+        <h2 class="text-center mb-4">Laboratoires et unités de recherche</h2>
+
+        <div class="row g-4">
+            {% for labo in laboratoires %}
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ labo.nom }}</h5>
+                        <p class="card-text">
+                            {{ labo.description|truncatewords:25 }}
+                        </p>
+                        <a href="{% url 'laboratoire_detail' labo.id %}"
+                           class="btn btn-outline-primary">
+                            Lire la suite
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">Aucun laboratoire disponible.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+{% endblock %}

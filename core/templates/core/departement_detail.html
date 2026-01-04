@@ -1,0 +1,127 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+{{ departement.nom }}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<section class="py-5">
+    <div class="container">
+
+        <h2 class="text-center mb-5">{{ departement.nom }}</h2>
+
+        <!-- ================= FORMATIONS & MATIERES ================= -->
+        {% for niveau, formations in formations_par_niveau.items %}
+            <h3 class="mb-4">{{ niveau }}</h3>
+
+            {% for formation in formations %}
+                <div class="mb-5">
+                    <h5 class="fw-bold">{{ formation.nom }}</h5>
+
+                    {% if formation.description %}
+                        <p class="text-muted">{{ formation.description }}</p>
+                    {% endif %}
+
+                    <!-- TABLE MATIERES -->
+                    {% regroup formation.matieres.all by niveau_detail as matieres_group %}
+
+<div class="accordion" id="accordionFormation{{ formation.id }}">
+    {% for group in matieres_group %}
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading{{ formation.id }}{{ group.grouper }}">
+            <button class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse{{ formation.id }}{{ group.grouper }}"
+                    aria-expanded="false"
+                    aria-controls="collapse{{ formation.id }}{{ group.grouper }}">
+                {{ group.list.0.get_niveau_detail_display }}
+            </button>
+        </h2>
+
+        <div id="collapse{{ formation.id }}{{ group.grouper }}"
+             class="accordion-collapse collapse"
+             aria-labelledby="heading{{ formation.id }}{{ group.grouper }}"
+             data-bs-parent="#accordionFormation{{ formation.id }}">
+
+            <div class="accordion-body">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Matière</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for matiere in group.list %}
+                            <tr>
+                                <td>{{ matiere.nom }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% empty %}
+        <p>Aucune matière définie.</p>
+    {% endfor %}
+</div>
+
+                </div>
+            {% empty %}
+                <p>Aucune formation disponible pour ce niveau.</p>
+            {% endfor %}
+        {% endfor %}
+
+        <!-- ================= ENSEIGNANTS ================= -->
+        <h3 class="mb-4 mt-5">Enseignants</h3>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle">
+                <thead class="table-secondary">
+                    <tr>
+                        <th class="text-center">Photo</th>
+                        <th>Nom et Prénoms</th>
+                        <th class="text-center">Grade</th>
+                        <th class="text-center">Spécialité</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for enseignant in enseignants %}
+                    <tr>
+                        <td class="text-center">
+                            {% if enseignant.photo %}
+                                <img src="{{ enseignant.photo.url }}"
+                                     class="rounded-circle"
+                                     width="60" height="60"
+                                     style="object-fit:cover;">
+                            {% else %}
+                                <img src="{% static 'images/default_user.jpg' %}"
+                                     class="rounded-circle"
+                                     width="60" height="60"
+                                     style="object-fit:cover;">
+                            {% endif %}
+                        </td>
+                        <td>{{ enseignant.prenom }} {{ enseignant.nom }}</td>
+                        <td class="text-center">{{ enseignant.grade }}</td>
+                        <td class="text-center">{{ enseignant.specialite }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            Aucun enseignant pour ce département
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

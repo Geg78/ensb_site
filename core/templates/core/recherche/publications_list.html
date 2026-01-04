@@ -1,0 +1,87 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Publications{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+
+        <h2 class="text-center mb-4">Publications scientifiques</h2>
+
+        <!-- ===== Champ de recherche ===== -->
+        <div class="mb-4">
+            <input type="text" id="searchInput" class="form-control"
+                   placeholder="Rechercher par titre, auteur, laboratoire ou axe">
+        </div>
+
+        <!-- ===== Tableau des publications ===== -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle" id="publicationsTable">
+                <thead class="table-primary text-center">
+                    <tr>
+                        <th>Titre</th>
+                        <th>Date</th>
+                        <th>Auteurs</th>
+                        <th>Laboratoire</th>
+                        <th>Axe de recherche</th>
+                        <th>PDF</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pub in publications %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'publication_detail' pub.id %}">{{ pub.titre }}</a>
+                        </td>
+                        <td class="text-center">{{ pub.date_publication|date:"d M Y" }}</td>
+                        <td>
+                            {% for auteur in pub.auteurs.all %}
+                                {{ auteur.prenom }} {{ auteur.nom }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>{% if pub.laboratoire %}{{ pub.laboratoire.nom }}{% else %}-{% endif %}</td>
+                        <td>{% if pub.axe_recherche %}{{ pub.axe_recherche.titre }}{% else %}-{% endif %}</td>
+                        <td class="text-center">
+                            {% if pub.fichier_pdf %}
+                                <a href="{{ pub.fichier_pdf.url }}" target="_blank" class="btn btn-sm btn-primary">PDF</a>
+                            {% else %}-{% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">Aucune publication trouvée.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===== Script JS pour recherche live ===== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('searchInput');
+    const table = document.getElementById('publicationsTable').getElementsByTagName('tbody')[0];
+
+    input.addEventListener('keyup', function() {
+        const filter = input.value.toLowerCase();
+        const rows = table.getElementsByTagName('tr');
+
+        Array.from(rows).forEach(row => {
+            const cellsText = Array.from(row.getElementsByTagName('td'))
+                                   .map(td => td.textContent.toLowerCase())
+                                   .join(' ');
+
+            if(cellsText.includes(filter)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
+
+{% endblock %}

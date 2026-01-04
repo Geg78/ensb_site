@@ -1,0 +1,52 @@
+.hero-carousel {
+    position: relative;
+    height: 65vh;   /* 👈 HAUTEUR IDÉALE */
+    width: 100%;
+}
+
+.hero-img {
+    height: 65vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+}
+
+.hero-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width: 768px) {
+    .hero-carousel,
+    .hero-img {
+        height: 50vh;
+    }
+}
+.carousel-indicators [data-bs-target] {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.carousel-indicators .active {
+    background-color: #fff;
+}
+img.img-fluid {
+    min-height: 200px;
+}
+iframe {
+    min-height: 300px;
+}
+
+

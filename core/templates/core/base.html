@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Université{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/aos@3.0.0-beta.6/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{% url 'accueil' %}">ENSB</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/' %}active{% endif %}"
+                       href="{% url 'accueil' %}">Accueil</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'universite' %}">Université</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'fac_dep_form' %}">Formations</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'admissions' %}">Admissions</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'recherche_home' %}">Recherche</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'actualites' %}">Actualités</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ================= CONTENU ================= -->
+{% block content %}{% endblock %}
+{% if messages %}
+<div class="container mt-3">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} text-center">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-dark text-white text-center py-4">
+    <p class="mb-1">© 2026 Ecole Normale Supérieure de Bongor</p>
+    <small>Mentions légales · Politique de confidentialité · Contact</small>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- ===== AOS JS ===== -->
+<script src="https://cdn.jsdelivr.net/npm/aos@3.0.0-beta.6/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000, // durée de l'animation en ms
+    once: true      // l'animation se joue une seule fois
+  });
+</script>
+</body>
+</html>

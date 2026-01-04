@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ publication.titre }}{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+
+        <h2 class="mb-4">{{ publication.titre }}</h2>
+
+        <p><strong>Date de publication :</strong> {{ publication.date_publication|date:"d M Y" }}</p>
+
+        <p><strong>Auteurs :</strong>
+            {% for auteur in publication.auteurs.all %}
+                {{ auteur.prenom }} {{ auteur.nom }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+
+        {% if publication.laboratoire %}
+        <p><strong>Laboratoire :</strong> {{ publication.laboratoire.nom }}</p>
+        {% endif %}
+
+        {% if publication.axe_recherche %}
+        <p><strong>Axe de recherche :</strong> {{ publication.axe_recherche.titre }}</p>
+        {% endif %}
+
+        <hr>
+
+        <p>{{ publication.resume }}</p>
+
+        {% if publication.fichier_pdf %}
+            <a href="{{ publication.fichier_pdf.url }}" target="_blank" class="btn btn-primary">
+                Télécharger le PDF
+            </a>
+        {% endif %}
+
+    </div>
+</section>
+{% endblock %}

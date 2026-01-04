@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Départements - {{ faculte.nom }}{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">
+            Départements de la faculté {{ faculte.nom }}
+        </h2>
+
+        <div class="row g-4">
+            {% for departement in departements %}
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ departement.nom }}</h5>
+                        <a href="{% url 'departement_detail' departement.id %}"
+                           class="btn btn-outline-primary">
+                            Voir les formations
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">Aucun département pour cette faculté.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

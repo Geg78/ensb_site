@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Université{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <h1 class="text-center mb-5">{{ page.titre }}</h1>
+
+        <!-- ================= Historique ================= -->
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h2 class="mb-3">Historique</h2>
+                <p>{{ page.historique }}</p>
+            </div>
+        </div>
+
+        <!-- ================= Missions ================= -->
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h2 class="mb-3">Missions</h2>
+                <p>{{ page.missions }}</p>
+            </div>
+        </div>
+
+        <!-- ================= Valeurs ================= -->
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h2 class="mb-3">Valeurs</h2>
+                <p>{{ page.valeurs }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

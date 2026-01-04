@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Actualités{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h1 class="text-center mb-5">Toutes les actualités</h1>
+
+        <div class="row g-4">
+            {% for actualite in actualites %}
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ actualite.titre }}</h5>
+                        <p class="card-text">
+                            {{ actualite.contenu|truncatewords:25 }}
+                        </p><a href="{% url 'detail_actualite' actualite.id %}" class="btn btn-outline-primary mt-2">Lire la suite</a>
+                        <small class="text-muted">
+                            Publié le {{ actualite.date_publication|date:"d/m/Y" }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+                <p class="text-center">Aucune actualité disponible.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

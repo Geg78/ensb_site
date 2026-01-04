@@ -1,0 +1,65 @@
+<!-- {% extends 'core/base.html' %}
+
+{% block title %}Formations{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">
+            Formations — {{ departement.nom }}
+        </h2>
+
+        <div class="row g-4">
+            {% for formation in formations %}
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5>{{ formation.titre }}</h5>
+                        <p><strong>Niveau :</strong> {{ formation.niveau }}</p>
+                        <p>{{ formation.description|truncatewords:20 }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+                <p class="text-center">Aucune formation.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+ -->
+<!-- ======================== -->
+ {% extends 'core/base.html' %}
+
+{% block title %}Nos formations{% endblock %}
+
+{% block content %}
+<!-- ================= FACULTÉS ================= -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Nos facultés</h2>
+
+        <div class="row g-4">
+            {% for faculte in facultes %}
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ faculte.nom }}</h5>
+                        <p class="card-text">{{ faculte.description|truncatewords:20 }}</p>
+                        <a href="{% url 'departements' faculte.id %}"
+                           class="btn btn-outline-primary">
+                            Voir les départements
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+                <p class="text-center">Aucune faculté enregistrée.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}
