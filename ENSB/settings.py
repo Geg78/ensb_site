@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-8ab$ad!=9*g1f6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['geg.pythonanywhere.com']
 
 
 # Application definition
@@ -142,5 +142,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'gegoubemapagne@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get('Informatique@1991')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
