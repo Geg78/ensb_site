@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'ENSB.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ensb_db',      
+        'NAME': 'geg$ensb_db',      
         'USER': 'geg', 
         'PASSWORD': 'Informatique@1991',
         'HOST': 'geg.mysql.pythonanywhere-services.com',
