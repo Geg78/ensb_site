@@ -72,13 +72,17 @@ WSGI_APPLICATION = 'ENSB.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'geg$ensb_db',                 # Remplace "ensb_db" par le nom exact de ta base
-        'USER': 'geg',                         # Ton username PythonAnywhere
-        'PASSWORD': 'Informatique@1991',      # Ton mot de passe PythonAnywhere
+        'NAME': 'geg$ensb_db',
+        'USER': 'geg',
+        'PASSWORD': 'Informatique@1991',
         'HOST': 'geg.mysql.pythonanywhere-services.com',
         'PORT': '3306',
-    },
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+    }
 }
+
 
 # =======================
 # PASSWORD VALIDATION
