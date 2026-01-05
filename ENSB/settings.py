@@ -86,11 +86,6 @@ DATABASES = {
         'HOST': 'geg.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     },
-    'sqlite': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    
 }
 
 
@@ -133,16 +128,12 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 #Envoi de message
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
 EMAIL_HOST_USER = 'gegoubemapagne@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ.get('Informatique@1991')
+EMAIL_HOST_PASSWORD = 'Informatique@1991'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
