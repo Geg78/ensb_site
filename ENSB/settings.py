@@ -80,11 +80,11 @@ WSGI_APPLICATION = 'ENSB.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ensb_db',
-        'HOTE': 'localhost',
-        'PORT': 3306,
-        'USER': 'root',
-        'PASSWORD': ''
+        'NAME': 'ensb_db',      
+        'USER': 'geg', 
+        'PASSWORD': 'Informatique@1991',
+        'HOST': 'geg.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     },
     'sqlite': {
         'ENGINE': 'django.db.backends.sqlite3',
